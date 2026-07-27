@@ -1,0 +1,17 @@
+name: pdf-bookmark-migration
+version: "1.0.0"
+description: >-
+  Migrate PDF bookmarks (outlines) from a source PDF to a target PDF,
+  preserving nested structure, destination types, and page-level coordinates.
+  Supports multi-level bookmarks, batch processing, and cross-PDF page mapping.
+author: anonymous
+tags:
+  - pdf
+  - bookmarks
+  - outline
+  - migration
+  - pikepdf
+  - python
+requirements:
+  - python >=3.10
+  - pikepdf
