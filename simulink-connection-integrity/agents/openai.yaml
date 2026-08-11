@@ -1,0 +1,4 @@
+interface:
+  display_name: "Simulink Connection Integrity"
+  short_description: "Detect broken Simulink wiring before model saves"
+  default_prompt: "Use $simulink-connection-integrity to baseline and verify all Simulink connections around a model edit."
