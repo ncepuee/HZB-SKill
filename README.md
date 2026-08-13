@@ -2,7 +2,7 @@
 
 HZB's custom AI agent skills collection for Claude Code, Codex, and other AI coding tools.
 
-当前版本：[v1.0.8](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.8)
+当前版本：[v1.1.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.1.0)
 
 ## Skills (24 个)
 
@@ -14,7 +14,7 @@ HZB's custom AI agent skills collection for Claude Code, Codex, and other AI cod
 | `power-system-dynamics-control` | Power System Dynamics (Andersson) | 频率控制、电压控制、FACTS、系统稳定性 |
 | `align-ieee-powerflow-simulink` | IEEE标准节点系统 & MATLAB/Simulink SPS | 潮流与Phasor模型参数对齐、初始化、序测量、P/Q及误差验证 |
 | `route-simulink-schematics` | 人工优化的IEEE 123节点三相馈线布局 | 拓扑优先布局、三相平行成束布线、模块方向选择、布局差分审计 |
-| `simulink-connection-integrity` | 通用 Simulink 接线完整性守卫 | 修改前连接基线、修改后断线/悬空端口/Mask PID/Goto-From/未修改模块差分审计 |
+| `simulink-connection-integrity` | 通用 Simulink 接线完整性守卫 | `fast/standard/release` 分级检查、断线/端口/PID/Goto-From 审计、回调与 Mask 参数保护、SLX 包级复检 |
 | `dynamic-mode-decomposition` | DMD (Kutz & Brunton) | DMD算法、Koopman算子、数据驱动建模 |
 | `Khalil-Nonlinear-Systems-3rd` | Nonlinear Systems 3rd (Khalil) | Lyapunov稳定性、ISS、无源性、反馈线性化、奇异摄动 |
 | `Modern-Control-Engineering-Ogata` | Modern Control Engineering 5th (Ogata) | 根轨迹、频域设计、PID整定、状态空间 |
@@ -35,6 +35,7 @@ HZB's custom AI agent skills collection for Claude Code, Codex, and other AI cod
 
 ## Releases
 
+- [v1.1.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.1.0)：升级 `simulink-connection-integrity`，新增风险分级检查、保存后 SLX 包级结构比较、模型回调与 Mask 参数保护契约，并显著加快大型模型检查。
 - [v1.0.8](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.8)：新增 `simulink-connection-integrity`，在任意 Simulink 模型修改前后建立连接基线并阻止非预期断线、动态 Mask 端口悬空及未修改模块接线漂移。
 - [v1.0.7](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.7)：新增 `pdf-bookmark-migration`，PDF书签迁移工具，支持多级嵌套、XYZ坐标保留、批量处理。
 - [v1.0.6](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.6)：新增 `patent-pdf-download`，批量下载专利全文PDF，多源回退策略；更新 `academic-ppt-infographic-cn-skill`。
@@ -44,6 +45,52 @@ HZB's custom AI agent skills collection for Claude Code, Codex, and other AI cod
 - [v1.0.2](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.2)：新增 `scr-calculator`，短路比计算器，支持Lg↔SCR换算与电网强度分类。
 - [v1.0.1](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.1)：版本对齐，发布 `multi-agent-comm` 至 GitHub Releases。
 - [v1.0.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.0)：初始发布，包含 `multi-agent-comm`。
+
+## Simulink Connection Integrity
+
+`simulink-connection-integrity` 在模型修改前建立结构基线，在保存前检查内存模型，并在保存后直接检查 `.slx` 内部 XML。脚本不会自动保存、重连或覆盖模型。
+
+### 检查等级
+
+| Profile | 适用场景 | 检查内容 |
+|---------|----------|----------|
+| `fast` | 参数、Mask、回调、UserData 等日常修改 | 全模型线路、关键模块状态、保护契约；跳过编译和全量端口枚举 |
+| `standard` | 模块、端口、控制模式、Variant、PID 接线修改 | `fast` + 输入端口连接、悬空线、外部 PID 端口检查 |
+| `release` | Git 里程碑、正式扫频或发布前 | `standard` + 模型 Update/Compile，要求编译通过 |
+
+推荐工作流：
+
+```matlab
+skillDir = 'C:\Users\hzb\.agents\skills\HZB-Skill\simulink-connection-integrity';
+addpath(fullfile(skillDir, 'scripts'));
+
+baselineFile = fullfile(tempdir, 'model_before_edit.mat');
+opts = struct('Profile', 'fast');
+
+simulink_connection_guard('baseline', modelFile, baselineFile, opts);
+
+% 在内存中修改模型，暂不保存。
+
+preSave = simulink_connection_guard('check', modelName, baselineFile, opts);
+assert(preSave.Passed);
+save_system(modelName);
+
+postSave = simulink_connection_guard( ...
+    'packagecheck', modelFile, baselineFile, opts);
+assert(postSave.Passed);
+```
+
+保护模型回调与 Mask 参数：
+
+```matlab
+opts.PreserveModelCallbacks = true;
+opts.ProtectedMaskParameters = { ...
+    'Model Initialization_new', ...
+    {'InitFcnX','prel','posl','inif','strf'} ...
+};
+```
+
+在包含 47,448 个模块、32,720 条连接的实际 Simulink 电路模型上，R2024b 测试结果为：`fast baseline` 约 22.2 秒，`fast check` 约 16.9 秒，保存后的 `packagecheck` 约 0.76 秒。
 
 ## Usage
 

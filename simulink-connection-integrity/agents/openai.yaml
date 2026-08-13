@@ -1,4 +1,4 @@
 interface:
   display_name: "Simulink Connection Integrity"
-  short_description: "Detect broken Simulink wiring before model saves"
-  default_prompt: "Use $simulink-connection-integrity to baseline and verify all Simulink connections around a model edit."
+  short_description: "Fast, scoped Simulink wiring regression checks"
+  default_prompt: "Use $simulink-connection-integrity to select a risk-based profile, baseline the model, verify wiring before save, and validate the saved SLX package."
