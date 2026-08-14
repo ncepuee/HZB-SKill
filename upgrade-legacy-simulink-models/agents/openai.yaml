@@ -1,0 +1,4 @@
+interface:
+  display_name: "Upgrade Legacy Simulink Models"
+  short_description: "Upgrade and verify legacy Simulink and SPS models"
+  default_prompt: "Use $upgrade-legacy-simulink-models to migrate this legacy Simulink model while preserving a verified source-release version."

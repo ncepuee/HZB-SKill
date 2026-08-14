@@ -2,9 +2,9 @@
 
 HZB's custom AI agent skills collection for Claude Code, Codex, and other AI coding tools.
 
-当前版本：[v1.1.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.1.0)
+当前版本：[v1.2.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.2.0)
 
-## Skills (24 个)
+## Skills (25 个)
 
 | Skill | 来源/书籍 | 核心内容 |
 |-------|----------|---------|
@@ -15,6 +15,7 @@ HZB's custom AI agent skills collection for Claude Code, Codex, and other AI cod
 | `align-ieee-powerflow-simulink` | IEEE标准节点系统 & MATLAB/Simulink SPS | 潮流与Phasor模型参数对齐、初始化、序测量、P/Q及误差验证 |
 | `route-simulink-schematics` | 人工优化的IEEE 123节点三相馈线布局 | 拓扑优先布局、三相平行成束布线、模块方向选择、布局差分审计 |
 | `simulink-connection-integrity` | 通用 Simulink 接线完整性守卫 | `fast/standard/release` 分级检查、断线/端口/PID/Goto-From 审计、回调与 Mask 参数保护、SLX 包级复检 |
+| `upgrade-legacy-simulink-models` | MATLAB/Simulink 跨版本迁移实战 | 旧版模型保护、SPS/SimPowerSystems 转原生 Simscape、库链接与回调修复、版本隔离缓存、双版本编译及短仿真验收 |
 | `dynamic-mode-decomposition` | DMD (Kutz & Brunton) | DMD算法、Koopman算子、数据驱动建模 |
 | `Khalil-Nonlinear-Systems-3rd` | Nonlinear Systems 3rd (Khalil) | Lyapunov稳定性、ISS、无源性、反馈线性化、奇异摄动 |
 | `Modern-Control-Engineering-Ogata` | Modern Control Engineering 5th (Ogata) | 根轨迹、频域设计、PID整定、状态空间 |
@@ -35,6 +36,7 @@ HZB's custom AI agent skills collection for Claude Code, Codex, and other AI cod
 
 ## Releases
 
+- [v1.2.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.2.0)：新增 `upgrade-legacy-simulink-models`，支持旧版 Simulink/SPS 模型迁移到新 MATLAB，覆盖源模型保护、官方转换助手、遗留模块修复、Solver Configuration、版本隔离缓存以及源/目标双版本验收。
 - [v1.1.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.1.0)：升级 `simulink-connection-integrity`，新增风险分级检查、保存后 SLX 包级结构比较、模型回调与 Mask 参数保护契约，并显著加快大型模型检查。
 - [v1.0.8](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.8)：新增 `simulink-connection-integrity`，在任意 Simulink 模型修改前后建立连接基线并阻止非预期断线、动态 Mask 端口悬空及未修改模块接线漂移。
 - [v1.0.7](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.7)：新增 `pdf-bookmark-migration`，PDF书签迁移工具，支持多级嵌套、XYZ坐标保留、批量处理。
@@ -91,6 +93,24 @@ opts.ProtectedMaskParameters = { ...
 ```
 
 在包含 47,448 个模块、32,720 条连接的实际 Simulink 电路模型上，R2024b 测试结果为：`fast baseline` 约 22.2 秒，`fast check` 约 16.9 秒，保存后的 `packagecheck` 约 0.76 秒。
+
+## Upgrade Legacy Simulink Models
+
+`upgrade-legacy-simulink-models` 用于将旧版 `.slx/.mdl` 模型迁移到较新的 MATLAB/Simulink，同时保留可在原 MATLAB 版本运行的源模型。它区分“旧运行时保留”和“SPS 转原生 Simscape”两条路线，并要求加载、结构、Update、短仿真和行为对比逐级验收。
+
+```matlab
+skillDir = 'C:\Users\hzb\.agents\skills\HZB-Skill\upgrade-legacy-simulink-models';
+addpath(fullfile(skillDir, 'scripts'));
+
+configure_release_filegen(fileparts(modelFile));
+inspect_upgrade_environment(modelFile);
+risk = scan_model_migration_risks(modelFile);
+result = validate_migrated_model(modelFile, ...
+    'ExpectedMode', 'native', 'SimulationStopTime', 0.02);
+assert(result.passed, result.summary);
+```
+
+Skill 已分别使用 MATLAB R2024b 的 SPS 源模型和 MATLAB R2026b 的原生 Simscape 迁移模型完成实测。
 
 ## Usage
 
