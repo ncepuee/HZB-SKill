@@ -63,7 +63,12 @@ HZB's custom AI agent skills collection for Claude Code, Codex, and other AI cod
 推荐工作流：
 
 ```matlab
-skillDir = 'C:\Users\hzb\.agents\skills\HZB-Skill\simulink-connection-integrity';
+userHome = getenv('USERPROFILE');
+if isempty(userHome)
+    userHome = getenv('HOME');
+end
+skillDir = fullfile(userHome, '.agents', 'skills', 'HZB-Skill', ...
+    'simulink-connection-integrity');
 addpath(fullfile(skillDir, 'scripts'));
 
 baselineFile = fullfile(tempdir, 'model_before_edit.mat');
@@ -99,7 +104,12 @@ opts.ProtectedMaskParameters = { ...
 `upgrade-legacy-simulink-models` 用于将旧版 `.slx/.mdl` 模型迁移到较新的 MATLAB/Simulink，同时保留可在原 MATLAB 版本运行的源模型。它区分“旧运行时保留”和“SPS 转原生 Simscape”两条路线，并要求加载、结构、Update、短仿真和行为对比逐级验收。
 
 ```matlab
-skillDir = 'C:\Users\hzb\.agents\skills\HZB-Skill\upgrade-legacy-simulink-models';
+userHome = getenv('USERPROFILE');
+if isempty(userHome)
+    userHome = getenv('HOME');
+end
+skillDir = fullfile(userHome, '.agents', 'skills', 'HZB-Skill', ...
+    'upgrade-legacy-simulink-models');
 addpath(fullfile(skillDir, 'scripts'));
 
 configure_release_filegen(fileparts(modelFile));
