@@ -2,7 +2,7 @@
 
 HZB's custom AI agent skills collection for Claude Code, Codex, and other AI coding tools.
 
-当前版本：[v1.2.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.2.0)
+当前版本：[v1.2.1](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.2.1)
 
 ## Skills (26 个)
 
@@ -37,11 +37,11 @@ HZB's custom AI agent skills collection for Claude Code, Codex, and other AI cod
 
 ## Releases
 
+- [v1.2.1](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.2.1)：新增 `pdf-a4-normalizer`，递归核查 PDF 页面尺寸，仅转换非 A4 文件，支持交互内容风险识别与可见效果扁平化。
 - [v1.2.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.2.0)：新增 `upgrade-legacy-simulink-models`，支持旧版 Simulink/SPS 模型迁移到新 MATLAB，覆盖源模型保护、官方转换助手、遗留模块修复、Solver Configuration、版本隔离缓存以及源/目标双版本验收。
 - [v1.1.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.1.0)：升级 `simulink-connection-integrity`，新增风险分级检查、保存后 SLX 包级结构比较、模型回调与 Mask 参数保护契约，并显著加快大型模型检查。
 - [v1.0.8](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.8)：新增 `simulink-connection-integrity`，在任意 Simulink 模型修改前后建立连接基线并阻止非预期断线、动态 Mask 端口悬空及未修改模块接线漂移。
 - [v1.0.8](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.8)：新增 `pdf-a4-normalizer`，递归核查 PDF 页面尺寸，仅转换非 A4 文件，支持交互内容风险识别与可见效果扁平化。
-- [v1.0.8-pdf](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.8-pdf)：新增 `pdf-a4-normalizer`，递归核查 PDF 页面尺寸，仅转换非 A4 文件，支持交互内容风险识别与可见效果扁平化。
 - [v1.0.7](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.7)：新增 `pdf-bookmark-migration`，PDF书签迁移工具，支持多级嵌套、XYZ坐标保留、批量处理。
 - [v1.0.6](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.6)：新增 `patent-pdf-download`，批量下载专利全文PDF，多源回退策略；更新 `academic-ppt-infographic-cn-skill`。
 - [v1.0.5](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.0.5)：新增 `route-simulink-schematics`，提供拓扑优先的 Simulink/Simscape 布局、三相成束布线与差分审计。
