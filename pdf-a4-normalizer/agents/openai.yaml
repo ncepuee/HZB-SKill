@@ -1,0 +1,4 @@
+interface:
+  display_name: "PDF A4 Normalizer"
+  short_description: "Audit and normalize PDF pages to ISO A4 safely"
+  default_prompt: "Use $pdf-a4-normalizer to audit PDF page sizes and create verified A4 copies while preserving originals."

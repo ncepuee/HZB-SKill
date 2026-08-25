@@ -1,0 +1,10 @@
+name: pdf-a4-normalizer
+version: 1.0.0
+description: Audit PDF page dimensions and create verified ISO A4 copies while preserving originals.
+author: Zhenbin Huang
+license: MIT
+tags:
+  - pdf
+  - a4
+  - document-processing
+  - pyMuPDF
