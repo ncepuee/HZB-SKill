@@ -1,0 +1,128 @@
+{
+  "version": "2.0",
+  "units": "px",
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "slide_width_in": 13.333333,
+    "slide_height_in": 7.5
+  },
+  "defaults": {
+    "font": "Microsoft YaHei",
+    "color": "#0E2240",
+    "margin": 0.02
+  },
+  "styles": {
+    "title": {
+      "size": 28,
+      "bold": true,
+      "align": "center",
+      "valign": "middle"
+    },
+    "card": {
+      "fill": "#F6F9FF",
+      "line": "#1647D8",
+      "line_width": 1.2,
+      "rounded": true
+    }
+  },
+  "slides": [
+    {
+      "id": "s01",
+      "background": "#FFFFFF",
+      "expected_text": [
+        "Editable PowerPoint Reconstruction",
+        "Native editable card"
+      ],
+      "critical_regions": [
+        {"id": "title", "x": 160, "y": 50, "w": 1600, "h": 120},
+        {"id": "card", "x": 160, "y": 230, "w": 500, "h": 260}
+      ],
+      "elements": [
+        {
+          "id": "s01_title",
+          "type": "text",
+          "style_ref": "title",
+          "x": 160,
+          "y": 50,
+          "w": 1600,
+          "h": 120,
+          "text": "Editable PowerPoint Reconstruction",
+          "z": 30,
+          "representation": "native-text"
+        },
+        {
+          "id": "s01_card",
+          "type": "box",
+          "style_ref": "card",
+          "x": 160,
+          "y": 230,
+          "w": 500,
+          "h": 260,
+          "z": 10,
+          "representation": "native-structure"
+        },
+        {
+          "id": "s01_card_text",
+          "parent": "s01_card",
+          "type": "text",
+          "x": 190,
+          "y": 300,
+          "w": 440,
+          "h": 100,
+          "text": "Native editable card",
+          "size": 18,
+          "bold": true,
+          "color": "#1647D8",
+          "align": "center",
+          "z": 20,
+          "representation": "native-text"
+        },
+        {
+          "id": "s01_connector",
+          "type": "line",
+          "x1": 700,
+          "y1": 360,
+          "x2": 930,
+          "y2": 360,
+          "color": "#0E2240",
+          "width": 2.0,
+          "z": 10,
+          "representation": "native-structure"
+        },
+        {
+          "id": "s01_node",
+          "type": "circle",
+          "cx": 970,
+          "cy": 360,
+          "r": 24,
+          "fill": "#08742C",
+          "z": 12,
+          "representation": "native-structure"
+        },
+        {
+          "id": "s01_table",
+          "type": "table",
+          "x": 1080,
+          "y": 230,
+          "w": 650,
+          "h": 300,
+          "rows": 3,
+          "cols": 3,
+          "data": [
+            ["Item", "Round 1", "Round 2"],
+            ["A", 10, 0],
+            ["B", 6, 4]
+          ],
+          "header_fill": "#F4F7FB",
+          "fill": "#FFFFFF",
+          "size": 11,
+          "align": "center",
+          "z": 15,
+          "representation": "native-structure"
+        }
+      ]
+    }
+  ]
+}
+

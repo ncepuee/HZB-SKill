@@ -1,0 +1,8 @@
+interface:
+  display_name: "Image2PPT"
+  short_description: "Rebuild images as high-fidelity editable PowerPoint files"
+  brand_color: "#1647D8"
+  default_prompt: "Use $image2ppt to reconstruct this reference image as a high-fidelity editable PowerPoint and validate the rendered result."
+policy:
+  allow_implicit_invocation: true
+

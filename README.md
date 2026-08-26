@@ -2,9 +2,9 @@
 
 HZB's custom AI agent skills collection for Claude Code, Codex, and other AI coding tools.
 
-当前版本：[v1.2.1](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.2.1)
+当前版本：[v1.3.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.3.0)
 
-## Skills (26 个)
+## Skills (28 个)
 
 | Skill | 来源/书籍 | 核心内容 |
 |-------|----------|---------|
@@ -34,9 +34,12 @@ HZB's custom AI agent skills collection for Claude Code, Codex, and other AI cod
 | `twitter-auto-publisher` | Twitter/X 自动发布工具 | Chrome CDP 自动调研+发推，无需 Twitter API，支持账号抓取/关键词搜索/微信文章搜索 |
 | `pdf-bookmark-migration` | PDF Bookmark Migration | PDF书签（大纲）迁移工具，支持多级嵌套书签、XYZ/Fit目标类型保留、批量处理 |
 | `pdf-a4-normalizer` | PDF A4 Normalizer | 递归核查 PDF 页面尺寸，仅转换非 A4 文件，按比例居中适配 A4 并复核输出 |
+| `image2ppt` | Image to Editable PowerPoint | 将图片、截图、信息图或PDF页面重建为高保真、可编辑的 PowerPoint，并通过渲染对比验收 |
+| `open-kimi-ppt` | Open Kimi PPT | 基于 PPTD 中间格式创建、编辑、复制、读取和导出可编辑演示文稿，同时生成 PPTD 项目与 PPTX |
 
 ## Releases
 
+- [v1.3.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.3.0)：新增 `image2ppt` 与 `open-kimi-ppt`，分别用于图片到可编辑PPT的高保真重建，以及基于PPTD的演示文稿创建、编辑和导出。
 - [v1.2.1](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.2.1)：新增 `pdf-a4-normalizer`，递归核查 PDF 页面尺寸，仅转换非 A4 文件，支持交互内容风险识别与可见效果扁平化。
 - [v1.2.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.2.0)：新增 `upgrade-legacy-simulink-models`，支持旧版 Simulink/SPS 模型迁移到新 MATLAB，覆盖源模型保护、官方转换助手、遗留模块修复、Solver Configuration、版本隔离缓存以及源/目标双版本验收。
 - [v1.1.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.1.0)：升级 `simulink-connection-integrity`，新增风险分级检查、保存后 SLX 包级结构比较、模型回调与 Mask 参数保护契约，并显著加快大型模型检查。
