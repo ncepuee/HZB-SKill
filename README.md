@@ -2,9 +2,9 @@
 
 HZB's custom AI agent skills collection for Claude Code, Codex, and other AI coding tools.
 
-当前版本：[v1.3.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.3.0)
+当前版本：[v1.4.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.4.0)
 
-## Skills (28 个)
+## Skills (29 个)
 
 | Skill | 来源/书籍 | 核心内容 |
 |-------|----------|---------|
@@ -36,8 +36,11 @@ HZB's custom AI agent skills collection for Claude Code, Codex, and other AI cod
 | `pdf-a4-normalizer` | PDF A4 Normalizer | 递归核查 PDF 页面尺寸，仅转换非 A4 文件，按比例居中适配 A4 并复核输出 |
 | `image2ppt` | Image to Editable PowerPoint | 将图片、截图、信息图或PDF页面重建为高保真、可编辑的 PowerPoint，并通过渲染对比验收 |
 | `open-kimi-ppt` | Open Kimi PPT | 基于 PPTD 中间格式创建、编辑、复制、读取和导出可编辑演示文稿，同时生成 PPTD 项目与 PPTX |
+| `qiewenpaper-literature-search` | 切问学术 (Qiewenpaper) | 基于已登录切问学术账号的文献检索、对比、综述与引用整理，内置会话安全与额度保护边界 |
 
 ## Releases
+
+- [v1.4.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.4.0)：新增 `qiewenpaper-literature-search`，通过已登录的切问学术网页账号完成文献检索、对比与综述整理，含快速/深度检索模式、引用信息收集与内部接口排障参考，并明确禁止凭据提取与未授权额度消耗。
 
 - [v1.3.0](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.3.0)：新增 `image2ppt` 与 `open-kimi-ppt`，分别用于图片到可编辑PPT的高保真重建，以及基于PPTD的演示文稿创建、编辑和导出。
 - [v1.2.1](https://github.com/ncepuee/HZB-Skill/releases/tag/v1.2.1)：新增 `pdf-a4-normalizer`，递归核查 PDF 页面尺寸，仅转换非 A4 文件，支持交互内容风险识别与可见效果扁平化。
